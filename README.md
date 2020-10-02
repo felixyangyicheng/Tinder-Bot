@@ -5,7 +5,7 @@ environment Request:
   1. install Python 3.8.5 or later
   2. To build testing env, in Terminal
 # pip install virtualenv
-# python -m venv .  -> create a virtual env
+# python -m venv .  (-> create a virtual env)
 in windows terminal, to activate venev, 
 # cd <venv>/Scripts/activate.bat
 in mac or linux,
