@@ -16,3 +16,9 @@ in mac or linux,
 # pip install selenium
   
 And now you are ready to code or to test.
+
+you need to create a .py file named secret.py
+then put the following elements inside:
+
+username="<your login facebook>"
+password="<your password>"
