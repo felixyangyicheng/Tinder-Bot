@@ -28,3 +28,4 @@ password="<your password>"
 ![GitHub forks](https://img.shields.io/github/forks/felixyangyicheng/Tinder-Bot?style=social)
 ![GitHub User's stars](https://img.shields.io/github/stars/felixyangyicheng?style=social)
 ![GitHub watchers](https://img.shields.io/github/watchers/felixyangyicheng/Tinder-Bot?style=social)
+![PyPI - Python Version](https://img.shields.io/pypi/pyversions/3)
