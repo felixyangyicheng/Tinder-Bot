@@ -23,5 +23,5 @@ then put the following elements inside:
 username="<your login facebook>"
 password="<your password>"
   
-https://img.shields.io/github/followers/felixyangyicheng?style=social
+.. image:: https://img.shields.io/github/followers/felixyangyicheng?style=social   :alt: GitHub followers
  
