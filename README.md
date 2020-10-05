@@ -23,5 +23,5 @@ then put the following elements inside:
 username="<your login facebook>"
 password="<your password>"
   
-image:https://img.shields.io/github/followers/felixyangyicheng?style=social[GitHub followers
- 
+
+ ![GitHub followers](https://img.shields.io/github/followers/felixyangyicheng?style=social)!
