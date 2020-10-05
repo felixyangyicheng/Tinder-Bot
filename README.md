@@ -24,4 +24,5 @@ username="<your login facebook>"
 password="<your password>"
   
 
- ![GitHub followers](https://img.shields.io/github/followers/felixyangyicheng?style=social)!
+ ![GitHub followers](https://img.shields.io/github/followers/felixyangyicheng?style=social)
+![GitHub forks](https://img.shields.io/github/forks/felixyangyicheng/Tinder-Bot?style=social)
