@@ -5,15 +5,17 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC # explicite wait, raise exception when the element are not loaded
 
-from secrets import username, password
+from secrets import usernameTinder, password
 
 class TinderBot():
     def __init__(self):
         self.driver = webdriver.Chrome("C:/Users/y.yicheng/Documents/chromedriver.exe") #path in windows, le path de webdriver
         self.driver.implicitly_wait(10) # seconds 
-
-    def login(self):
+    def goTo(self):
         self.driver.get('https://tinder.com')
+    
+    def login(self):
+        
 
         try:
             element = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.XPATH, '/html/body/div[1]/div/div[1]/div/main/div[1]/div/div/header/div[1]/div[2]/div/button')))
@@ -43,7 +45,7 @@ class TinderBot():
         finally:
 
             email_in = self.driver.find_element_by_xpath('//*[@id="email"]')
-            email_in.send_keys(username)
+            email_in.send_keys(usernameTinder)
         
         try:
             element = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.XPATH, '//*[@id="pass"]')))
@@ -62,17 +64,13 @@ class TinderBot():
         self.driver.switch_to_window(base_window)
 
         
-
+    def postLogin(self):
         try:
             Autorise_btn = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.XPATH, '//*[@id="modal-manager"]/div/div/div/div/div[3]/button[1]')))
         finally:
             Autorise_btn = self.driver.find_element_by_xpath('//*[@id="modal-manager"]/div/div/div/div/div[3]/button[1]')
             Autorise_btn.click()
-            def auto_swipe(self):
-                while True:
-                    sleep(0.5)
-                    
-                    self.like()
+            
                     
         try:
             Activate_btn = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.XPATH, '//*[@id="modal-manager"]/div/div/div/div/div[3]/button[1]')))
@@ -96,6 +94,7 @@ class TinderBot():
         dislike_btn.click()
 
     def auto_swipe(self):
+        
         while True:
             sleep(0.5)
             try:
@@ -107,13 +106,46 @@ class TinderBot():
                 except Exception:
                 
                     try:
-                        self.close_popup()
+                        self.close_popupWithResult()
                     except Exception:
-                        self.close_match()
+                        try:
 
-    def close_popup(self):
-        popup_3 = self.driver.find_element_by_xpath('//*[@id="modal-manager"]/div/div/div[2]/button[2]')
-        popup_3.click()
+                            self.close_match()
+                        except Exception:
+                            print("No more new profil")
+                            
+                            bot.driver.quit()
+                            print("webDriver quited")
+                            bot.__init__()
+                            bot.goTo()
+                            bot.login()
+                            bot.postLogin()
+                            print("WebDriver restarted")
+                            bot.auto_swipe()
+
+                            
+                        finally:
+                            bot.auto_swipe()
+                    finally:
+                      
+                        bot.auto_swipe()
+                        
+
+    
+        
+    def close_popupWithResult(self):
+        result="Popup not clicked"
+        
+        if(result=="Popup not clicked"):
+            popup_3 = self.driver.find_element_by_xpath('//*[@id="modal-manager"]/div/div/div[2]/button[2]')
+            popup_3.click()
+            result="Popup closed"
+            
+            print(result)
+        else:
+            
+            
+            print(result)
 
     def close_match(self):
         try:
@@ -126,5 +158,7 @@ class TinderBot():
 
 
 bot = TinderBot()
+bot.goTo()
 bot.login()
+bot.postLogin()
 bot.auto_swipe()
