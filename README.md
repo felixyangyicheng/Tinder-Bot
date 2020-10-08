@@ -20,9 +20,13 @@ And now you are ready to code or to test.
 you need to create a .py file named secret.py
 then put the following elements inside:
 
-username="<your login facebook>"
-password="<your password>"
-  
+username="your login facebook"
+password="your password"
+
+08/10/2020 issues detected:
+-Problems with pageHandler when using python IDLE, "index out of range".
+-No exception handling when page frezen in facebook login.
+
 
  ![GitHub followers](https://img.shields.io/github/followers/felixyangyicheng?style=social)
 ![GitHub forks](https://img.shields.io/github/forks/felixyangyicheng/Tinder-Bot?style=social)
