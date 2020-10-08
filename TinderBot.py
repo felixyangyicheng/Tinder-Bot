@@ -1,5 +1,6 @@
 from selenium import webdriver
 from time import sleep
+import time
 #import pyautogui
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
@@ -115,12 +116,14 @@ class TinderBot():
                             print("No more new profil")
                             
                             bot.driver.quit()
+                            print (time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())) 
                             print("webDriver quited")
                             bot.__init__()
                             bot.goTo()
                             bot.login()
                             bot.postLogin()
                             print("WebDriver restarted")
+                            print (time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())) 
                             bot.auto_swipe()
 
                             
@@ -142,10 +145,12 @@ class TinderBot():
             result="Popup closed"
             
             print(result)
+            print (time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())) 
         else:
-            
-            
+                
+                
             print(result)
+            print (time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())) 
 
     def close_match(self):
         try:
