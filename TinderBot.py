@@ -1,7 +1,7 @@
 from selenium import webdriver
 from time import sleep
 import time
-#import pyautogui
+
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC # explicite wait, raise exception when the element are not loaded
@@ -10,79 +10,115 @@ from secrets import usernameTinder, password
 
 class TinderBot():
     def __init__(self):
-        self.driver = webdriver.Chrome("C:/Users/y.yicheng/Documents/chromedriver.exe") #path in windows, le path de webdriver
+        self.driver = webdriver.Chrome("C:/Users/y.yicheng/Documents/chromedriver.exe") #path in windows, le path de webdriver (/usr/local/bin/chromdriver.exe)
         self.driver.implicitly_wait(10) # seconds 
     def goTo(self):
         self.driver.get('https://tinder.com')
     
     def login(self):
-        
+        try:  
 
-        try:
-            element = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.XPATH, '/html/body/div[1]/div/div[1]/div/main/div[1]/div/div/header/div[1]/div[2]/div/button')))
-        finally:
-            connexion_btn = self.driver.find_element_by_xpath('/html/body/div[1]/div/div[1]/div/main/div[1]/div/div/header/div[1]/div[2]/div/button')
-            connexion_btn.click()
-        
-        try:
-            element = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.XPATH, '//*[@id="content"]/div/div[2]/div/div/div[1]/button')))
-        finally:
-            accept_btn = self.driver.find_element_by_xpath('//*[@id="content"]/div/div[2]/div/div/div[1]/button')
-            accept_btn.click()
-        
-        try:
-            element = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.XPATH, '//*[@id="modal-manager"]/div/div/div[1]/div/div[3]/span/div[2]/button')))
-        finally:
-            fb_btn = self.driver.find_element_by_xpath('//*[@id="modal-manager"]/div/div/div[1]/div/div[3]/span/div[2]/button')
-            fb_btn.click()
-        
-        sleep(3)
-        base_window = self.driver.window_handles[0]
-        self.driver.switch_to_window(self.driver.window_handles[1])
-        
-
-        try:
-            element = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.XPATH, '//*[@id="email"]')))
-        finally:
-
-            email_in = self.driver.find_element_by_xpath('//*[@id="email"]')
-            email_in.send_keys(usernameTinder)
-        
-        try:
-            element = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.XPATH, '//*[@id="pass"]')))
-        finally:
-            pass_in = self.driver.find_element_by_xpath('//*[@id="pass"]')
-            pass_in.send_keys(password)
-        
-        try:
-            element = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.XPATH, '//*[@id="u_0_0"]')))
-        finally:
+            try:
+                element = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.XPATH, '/html/body/div[1]/div/div[1]/div/main/div[1]/div/div/header/div[1]/div[2]/div/button')))
+            finally:
+                connexion_btn = self.driver.find_element_by_xpath('/html/body/div[1]/div/div[1]/div/main/div[1]/div/div/header/div[1]/div[2]/div/button')
+                connexion_btn.click()
             
-            login_btn = self.driver.find_element_by_xpath('//*[@id="u_0_0"]')
-            login_btn.click()
-        
+            try:
+                element = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.XPATH, '//*[@id="content"]/div/div[2]/div/div/div[1]/button')))
+            finally:
+                accept_btn = self.driver.find_element_by_xpath('//*[@id="content"]/div/div[2]/div/div/div[1]/button')
+                accept_btn.click()
+            
+            try:
+                element = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.XPATH, '//*[@id="modal-manager"]/div/div/div[1]/div/div[3]/span/div[2]/button')))
+            finally:
+                fb_btn = self.driver.find_element_by_xpath('//*[@id="modal-manager"]/div/div/div[1]/div/div[3]/span/div[2]/button')
+                fb_btn.click()
+            
+            sleep(3)
+            base_window = self.driver.window_handles[0]
+            self.driver.switch_to_window(self.driver.window_handles[1])
+            
 
-        self.driver.switch_to_window(base_window)
+            try:
+                element = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.XPATH, '//*[@id="email"]')))
+            finally:
 
+                email_in = self.driver.find_element_by_xpath('//*[@id="email"]')
+                email_in.send_keys(usernameTinder)
+            
+            try:
+                element = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.XPATH, '//*[@id="pass"]')))
+            finally:
+                pass_in = self.driver.find_element_by_xpath('//*[@id="pass"]')
+                pass_in.send_keys(password)
+            
+            try:
+                element = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.XPATH, '//*[@id="u_0_0"]')))
+            finally:
+                
+                login_btn = self.driver.find_element_by_xpath('//*[@id="u_0_0"]')
+                login_btn.click()
+            
+
+            self.driver.switch_to_window(base_window)
+        except Exception:
+            bot.relaunchProcess()
         
     def postLogin(self):
-        try:
-            Autorise_btn = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.XPATH, '//*[@id="modal-manager"]/div/div/div/div/div[3]/button[1]')))
-        finally:
-            Autorise_btn = self.driver.find_element_by_xpath('//*[@id="modal-manager"]/div/div/div/div/div[3]/button[1]')
-            Autorise_btn.click()
+        bot.autorizeGPS()
+        bot.activateNotification()
+
+
+    def autorizeGPS(self):
+        result="GPS not autorized"
+        if(result=="GPS not autorized"):
+            try:
+                Autorise_btn = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.XPATH, '//*[@id="modal-manager"]/div/div/div/div/div[3]/button[1]')))
+            finally:
+                Autorise_btn = self.driver.find_element_by_xpath('//*[@id="modal-manager"]/div/div/div/div/div[3]/button[1]')
+                Autorise_btn.click()
+            result="GPS autorized"
+            print(result)
+            print (time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())) 
+        else:
+            print(result)
+            print (time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())) 
+        
+        
             
-                    
-        try:
-            Activate_btn = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.XPATH, '//*[@id="modal-manager"]/div/div/div/div/div[3]/button[1]')))
-        finally:
-            Activate_btn = self.driver.find_element_by_xpath('//*[@id="modal-manager"]/div/div/div/div/div[3]/button[1]')
-            Activate_btn.click()
+            
+    def activateNotification(self):
+        result="Notification not activated"
+        if(result=="Notification not activated"):               
+            try:
+                Activate_btn = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.XPATH, '//*[@id="modal-manager"]/div/div/div/div/div[3]/button[1]')))
+            finally:
+                Activate_btn = self.driver.find_element_by_xpath('//*[@id="modal-manager"]/div/div/div/div/div[3]/button[1]')
+                Activate_btn.click()
+            result="Notification activated"
+            print(result)
+            print (time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())) 
+        else:
+            print(result)
+            print (time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())) 
 
             
+    def relaunchProcess(self):
+        bot.driver.quit()
+        print (time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())) 
+        print("webDriver quited")
+        bot.__init__()
+        bot.goTo()
+        bot.login()
+        print("WebDriver restarted")
+        print (time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())) 
+        #sleep(3)
+        #print("sleep 3 secondes")
+        bot.postLogin()
+        bot.auto_swipe()    
         
-        #pyautogui.click(294, 227, clicks = 1, duration = 3)
-        #pyautogui.click(310, 252, clicks = 1, duration = 1)
 
     def like(self):
         
@@ -115,17 +151,7 @@ class TinderBot():
                         except Exception:
                             print("No more new profil")
                             
-                            bot.driver.quit()
-                            print (time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())) 
-                            print("webDriver quited")
-                            bot.__init__()
-                            bot.goTo()
-                            bot.login()
-                            bot.postLogin()
-                            print("WebDriver restarted")
-                            print (time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())) 
-                            bot.auto_swipe()
-
+                            bot.relaunchProcess()
                             
                         finally:
                             bot.auto_swipe()
@@ -147,8 +173,8 @@ class TinderBot():
             print(result)
             print (time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())) 
         else:
-                
-                
+            
+            
             print(result)
             print (time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())) 
 
