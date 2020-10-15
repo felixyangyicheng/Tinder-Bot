@@ -64,11 +64,13 @@ class TinderBot():
 
             self.driver.switch_to_window(base_window)
         except Exception:
-            bot.relaunchProcess()
+            
+            self.relaunchProcess()
         
     def postLogin(self):
-        bot.autorizeGPS()
-        bot.activateNotification()
+        
+        self.autorizeGPS()
+        self.activateNotification()
 
 
     def autorizeGPS(self):
@@ -106,18 +108,19 @@ class TinderBot():
 
             
     def relaunchProcess(self):
-        bot.driver.quit()
+        
+        self.driver.quit()
         print (time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())) 
         print("webDriver quited")
-        bot.__init__()
-        bot.goTo()
-        bot.login()
+        self.__init__()
+        self.goTo()
+        self.login()
         print("WebDriver restarted")
         print (time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())) 
         #sleep(3)
         #print("sleep 3 secondes")
-        bot.postLogin()
-        bot.auto_swipe()    
+        self.postLogin()
+        self.auto_swipe()    
         
 
     def like(self):
@@ -151,13 +154,13 @@ class TinderBot():
                         except Exception:
                             print("No more new profil")
                             
-                            bot.relaunchProcess()
+                            self.relaunchProcess()
                             
                         finally:
-                            bot.auto_swipe()
+                            self.auto_swipe()
                     finally:
                       
-                        bot.auto_swipe()
+                        self.auto_swipe()
                         
 
     
@@ -185,11 +188,14 @@ class TinderBot():
             match_popup = self.driver.find_element_by_xpath('//*[@id="modal-manager-canvas"]/div/div/div[1]/div/div[3]/a')
             match_popup.click()
 
+
+def main():
+    bot = TinderBot()
+    bot.goTo()
+    bot.login()
+    bot.postLogin()
+    bot.auto_swipe()    
+if __name__ == "__main__":
+    main()
         
 
-
-bot = TinderBot()
-bot.goTo()
-bot.login()
-bot.postLogin()
-bot.auto_swipe()
