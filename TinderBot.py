@@ -169,17 +169,21 @@ class TinderBot():
         result="Popup not clicked"
         
         if(result=="Popup not clicked"):
-            popup_3 = self.driver.find_element_by_xpath('//*[@id="modal-manager"]/div/div/div[2]/button[2]')
-            popup_3.click()
-            result="Popup closed"
-            
-            print(result)
-            print (time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())) 
-        else:
-            
-            
-            print(result)
-            print (time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())) 
+            try:
+                popup_3=self.driver.find_element_by_xpath('//*[@id="modal-manager"]/div/div/button[2]')
+                popup_3.click()
+                result="Popup closed"
+            except:
+                try:
+                    popup_3 = self.driver.find_element_by_xpath('//*[@id="modal-manager"]/div/div/div[2]/button[2]')
+                    popup_3.click()
+                    result="Popup closed"
+                finally:
+                    print(result)
+                    print (time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())) 
+            finally:
+                print(result)
+                print (time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())) 
 
     def close_match(self):
         try:
